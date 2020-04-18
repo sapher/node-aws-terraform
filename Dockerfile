@@ -23,8 +23,6 @@ RUN unzip -j terraform_${TF_VERSION}_linux_amd64.zip
 FROM debian:buster-20200327-slim as aws
 ARG AWS_CLI_VERSION
 ARG PYTHON_MAJOR_VERSION
-ARG NODE_VERSION
-ARG NVM_VERSION
 RUN apt-get update
 RUN apt-get install -y python3=${PYTHON_MAJOR_VERSION}.3-1
 RUN apt-get install -y python3-pip=18.1-5
@@ -37,8 +35,10 @@ WORKDIR /workspace
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     python3=${PYTHON_MAJOR_VERSION}.3-1 \
-    && jq=1.5+dfsg-2+b1 \
-    && git=1:2.20.1-2+deb10u1 \
+    curl=7.64.0-4+deb10u1 \
+    jq=1.5+dfsg-2+b1 \
+    git=1:2.20.1-2+deb10u1 \
+    openssh-client=1:7.9p1-10+deb10u2 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_MAJOR_VERSION} 1
