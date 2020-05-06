@@ -1,6 +1,6 @@
 # Setup build arguments with default versions
 ARG AWS_CLI_VERSION=1.18.39
-ARG TF_VERSION=0.12.24
+ARG TF_VERSION=0.12.23
 ARG PYTHON_MAJOR_VERSION=3.7
 
 # Terraform
@@ -40,6 +40,8 @@ RUN apt-get update \
   git=1:2.20.1-2+deb10u1 \
   openssh-client=1:7.9p1-10+deb10u2 \
   gettext-base=0.19.8.1-9 \
+  build-essential=12.6 \
+  python=2.7.16-1 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_MAJOR_VERSION} 1
